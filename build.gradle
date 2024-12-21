@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33 // 设置编译的SDK版本，请根据实际情况调整
+
+    defaultConfig {
+        applicationId "com.example.bpkconverter" // 应用的包名
+        minSdkVersion 21 // 支持的最低SDK版本
+        targetSdkVersion 33 // 目标SDK版本
+        versionCode 1 // 应用的版本号
+        versionName "1.0" // 应用的版本名
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false // 发布版本是否启用代码混淆
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' // 自定义ProGuard规则文件
+        }
+    }
+
+    // 如果你的应用中包含原生代码，可以在这里配置ndk
+    // ndk {
+    //     abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+    // }
+
+    // 配置lint选项
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    // 应用的依赖项
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1' // 应用兼容性库
+    implementation 'com.google.android.material:material:1.6.1' // 材料设计库
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3' // 约束布局库
+
+    // 测试依赖项
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
